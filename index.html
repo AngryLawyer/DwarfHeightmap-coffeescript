@@ -1,29 +1,51 @@
 <!DOCTYPE html>
-<head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="scripts/dfhm.js"></script>
-</head>
-<body>
-    <select name="width">
-        <option value="257">257</option>
-        <option value="129">129</option>
-        <option value="65">65</option>
-        <option value="33">33</option>
-        <option value="17">17</option>
-    </select>
-    <select name="height">
-        <option value="257">257</option>
-        <option value="129">129</option>
-        <option value="65">65</option>
-        <option value="33">33</option>
-        <option value="17">17</option>
-    </select>
-    <input type="file" id="height-loader" name="file"/>
-    <input type="file" id="temperature-loader" name="file"/>
-    <input type="file" id="rainfall-loader" name="file"/>
-    <input type="file" id="drainage-loader" name="file"/>
-    <input type="file" id="savagery-loader" name="file"/>
-    
-    <canvas id="output" width="257" height="257"></canvas>
-    <pre id="output-text"></pre>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>Dwarf Fortress Heightmap Generator</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="scripts/dfhm.js"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a href="#" class="brand">Dwarf Fortress Heightmap Generator</a>
+                    <ul class="nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <select name="width">
+                        <option value="257">257</option>
+                        <option value="129">129</option>
+                        <option value="65">65</option>
+                        <option value="33">33</option>
+                        <option value="17">17</option>
+                    </select>
+                    <select name="height">
+                        <option value="257">257</option>
+                        <option value="129">129</option>
+                        <option value="65">65</option>
+                        <option value="33">33</option>
+                        <option value="17">17</option>
+                    </select>
+                    <input type="file" id="height-loader" name="file"/>
+                    <input type="file" id="temperature-loader" name="file"/>
+                    <input type="file" id="rainfall-loader" name="file"/>
+                    <input type="file" id="drainage-loader" name="file"/>
+                    <input type="file" id="savagery-loader" name="file"/>
+                    
+                    <canvas id="output" width="257" height="257"></canvas>
+                    <pre id="output-text"></pre>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

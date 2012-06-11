@@ -4,7 +4,26 @@
     <script src="scripts/dfhm.js"></script>
 </head>
 <body>
-    <input type="file" id="test-loader" name="file"/>
+    <select name="width">
+        <option value="257">257</option>
+        <option value="129">129</option>
+        <option value="65">65</option>
+        <option value="33">33</option>
+        <option value="17">17</option>
+    </select>
+    <select name="height">
+        <option value="257">257</option>
+        <option value="129">129</option>
+        <option value="65">65</option>
+        <option value="33">33</option>
+        <option value="17">17</option>
+    </select>
+    <input type="file" id="height-loader" name="file"/>
+    <input type="file" id="temperature-loader" name="file"/>
+    <input type="file" id="rainfall-loader" name="file"/>
+    <input type="file" id="drainage-loader" name="file"/>
+    <input type="file" id="savagery-loader" name="file"/>
+    
     <canvas id="output" width="257" height="257"></canvas>
     <pre id="output-text"></pre>
 </body>

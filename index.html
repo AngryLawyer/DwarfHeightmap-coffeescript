@@ -4,7 +4,15 @@
         <meta charset="utf-8"></meta>
         <title>Dwarf Fortress Heightmap Generator</title>
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <style>
+              body {
+                padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+              }
+        </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="scripts/bootstrap.min.js"></script>
+        <script src="scripts/dfhm_import.js"></script>
+        <script src="scripts/dfhm_export.js"></script>
         <script src="scripts/dfhm.js"></script>
     </head>
     <body>
@@ -21,28 +29,60 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="span12">
-                    <select name="width">
-                        <option value="257">257</option>
-                        <option value="129">129</option>
-                        <option value="65">65</option>
-                        <option value="33">33</option>
-                        <option value="17">17</option>
-                    </select>
-                    <select name="height">
-                        <option value="257">257</option>
-                        <option value="129">129</option>
-                        <option value="65">65</option>
-                        <option value="33">33</option>
-                        <option value="17">17</option>
-                    </select>
-                    <input type="file" id="height-loader" name="file"/>
-                    <input type="file" id="temperature-loader" name="file"/>
-                    <input type="file" id="rainfall-loader" name="file"/>
-                    <input type="file" id="drainage-loader" name="file"/>
-                    <input type="file" id="savagery-loader" name="file"/>
+                <div class="span3">
+                    <ul id="heightmaps" class="nav nav-list">
+                        <li class="nav-header">
+                            Heightmaps
+                        </li>
+                        <li class="active" data-type="elevation">
+                            <a href="#">Elevation</a>
+                        </li>
+                        <li data-type="temperature">
+                            <a href="#">Temperature</a>
+                        </li>
+                        <li data-type="rainfall">
+                            <a href="#">Rainfall</a>
+                        </li>
+                        <li data-type="drainage">
+                            <a href="#">Drainage</a>
+                        </li>
+                        <li data-type="savagery">
+                            <a href="#">Savagery</a>
+                        </li>
+                    </ul>
+                    <div class="btn-toolbar">
+                        <div id="dropdown-width" class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="master-label">257</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">257</a></li>
+                                <li><a href="#">129</a></li>
+                                <li><a href="#">65</a></li>
+                                <li><a href="#">33</a></li>
+                                <li><a href="#">17</a></li>
+                            </ul>
+                        </div>
+                        <div id="dropdown-height" class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="master-label">257</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">257</a></li>
+                                <li><a href="#">129</a></li>
+                                <li><a href="#">65</a></li>
+                                <li><a href="#">33</a></li>
+                                <li><a href="#">17</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9">
+                    <input type="file" id="image-loader" name="file"/>
                     
-                    <canvas id="output" width="257" height="257"></canvas>
+                    <canvas id="preview" width="257" height="257"></canvas>
                     <pre id="output-text"></pre>
                 </div>
             </div>

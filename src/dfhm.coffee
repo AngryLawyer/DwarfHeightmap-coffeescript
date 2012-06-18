@@ -24,6 +24,7 @@ onImageLoaded = (event) ->
 
     dummyImage.src = event.target.result
 
+# We've picked a file - load that badboy up
 onFileSelected = (event) ->
     if event.target.files[0]
         file = event.target.files[0]
@@ -64,7 +65,7 @@ onDimensionChange = (event) ->
 init = ->
     if window.File and window.FileReader
         #Set up the listeners for the different groups
-        #$('#test-loader').change onFileSelected
+        $('#image-loader').change onFileSelected
         #canvas = $('#output')[0]
         $('#dropdown-height, #dropdown-width').children('.dropdown-menu').find('a').click onDimensionChange
 
@@ -73,6 +74,7 @@ init = ->
             setActiveField $(event.target).parent('li')
         
     else
+        # TODO - provide sensible errors
         alert "noes"
 
 $(document).ready init

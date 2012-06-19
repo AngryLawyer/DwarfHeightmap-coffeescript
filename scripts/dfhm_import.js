@@ -7,9 +7,13 @@
   };
 
   window.DFHMImport = {
-    toGreyscale: function(ctx) {
-      var i, imageData, length, _fn, _i;
-      imageData = ctx.getImageData(0, 0, 17, 17);
+    toGreyscale: function(image, width, height) {
+      var canvas, ctx, i, imageData, length, _fn, _i;
+      canvas = $('<canvas/>')[0];
+      ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(image, 0, 0, width, height);
+      imageData = ctx.getImageData(0, 0, width, height);
       length = imageData.data.length;
       _fn = function(i) {
         var brightness;
@@ -20,7 +24,7 @@
       for (i = _i = 0; _i <= length; i = _i += 4) {
         _fn(i);
       }
-      return ctx.putImageData(imageData, 0, 0);
+      return imageData;
     }
   };
 

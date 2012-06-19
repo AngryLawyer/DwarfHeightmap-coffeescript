@@ -12,15 +12,14 @@ worldState =
     drainage: false
     savagery: false
 
-
-onImageLoaded = (event) ->
+# An image has been loaded
+onImageLoaded = (event, stateField) ->
+    {width: width, height:height} = getDimensions()
     dummyImage = new Image()
     dummyImage.onload = ->
-        ctx = canvas.getContext '2d'
-        ctx.clearRect 0, 0, 17, 17
-        ctx.drawImage dummyImage, 0, 0, 17, 17
-        toGreyscale ctx
-        $('#output-text').text(boilerplate(17, 17, boilerplateTiny) + pixelDataToMap(17, 17, 'PS_EL', ctx.getImageData(0,0,17,17).data))
+        worldState[stateField] = DFHMImport.toGreyscale dummyImage, width, height
+        markFieldAsPopulated stateField
+        #$('#output-text').text(boilerplate(17, 17, boilerplateTiny) + pixelDataToMap(17, 17, 'PS_EL', ctx.getImageData(0,0,17,17).data))
 
     dummyImage.src = event.target.result
 
@@ -30,12 +29,25 @@ onFileSelected = (event) ->
         file = event.target.files[0]
         if file.type.match "image.*"
             reader = new FileReader()
-            reader.onload = onImageLoaded
+            activeField = getActiveField()
+            reader.onload = (event) ->
+                onImageLoaded event, activeField
+
             reader.readAsDataURL file
         else
+            # TODO: Provide an image
             alert "Not an image"
 
-#Set the active field
+# Update the view to show that a field is full
+markFieldAsPopulated = (field) ->
+    getFieldRenderer(field).children('a').text(field + ' :)')
+
+getFieldRenderer = (field) ->
+    $('li', '#heightmaps').filter((index) ->
+        $(this).data('type') == field
+    )
+
+# Set the active field
 setActiveField = (field) ->
     $(field).addClass('active').siblings().removeClass('active')
 

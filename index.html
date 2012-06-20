@@ -34,19 +34,19 @@
                         <li class="nav-header">
                             Heightmaps
                         </li>
-                        <li class="active" data-type="elevation">
+                        <li class="active hm-option" data-type="elevation">
                             <a href="#">Elevation</a>
                         </li>
-                        <li data-type="temperature">
+                        <li class="hm-option" data-type="temperature">
                             <a href="#">Temperature</a>
                         </li>
-                        <li data-type="rainfall">
+                        <li class="hm-option" data-type="rainfall">
                             <a href="#">Rainfall</a>
                         </li>
-                        <li data-type="drainage">
+                        <li class="hm-option" data-type="drainage">
                             <a href="#">Drainage</a>
                         </li>
-                        <li data-type="savagery">
+                        <li class="hm-option" data-type="savagery">
                             <a href="#">Savagery</a>
                         </li>
                     </ul>
@@ -79,6 +79,9 @@
                         </div>
                     </div>
                     <input type="file" id="image-loader" name="file"/>
+                    <div class="btn-group">
+                        <input type="button" class="btn" id="clear" value="Clear All"/>
+                    </div>
                 </div>
                 <div class="span8">
                     <canvas id="preview" width="257" height="257"></canvas>

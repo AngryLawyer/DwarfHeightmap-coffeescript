@@ -12,6 +12,11 @@ worldState =
     drainage: false
     savagery: false
 
+onClearClick = (event) ->
+    event.preventDefault()
+    clearWorldState()
+    
+
 # An image has been loaded
 onImageLoaded = (event, stateField) ->
     {width: width, height:height} = getDimensions()
@@ -35,12 +40,12 @@ onFileSelected = (event) ->
 
             reader.readAsDataURL file
         else
-            # TODO: Provide an image
+            # TODO: Provide a pretty alert 
             alert "Not an image"
 
 # Update the view to show that a field is full
 markFieldAsPopulated = (field) ->
-    getFieldRenderer(field).children('a').text(field + ' :)')
+    getFieldRenderer(field).children('a').html(upcase(field) + ' &#10003;')
 
 getFieldRenderer = (field) ->
     $('li', '#heightmaps').filter((index) ->
@@ -63,15 +68,22 @@ getDimensions = ->
 
 # Dimensions have changed, so the current world state is unusable
 clearWorldState = ->
-    worldState.elevation = worldState.temperature = worldState.rainfall = worldstate.drainage = worldstate.savagery = false
+    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = false
+    $('#heightmaps').children('.hm-option').each (index, item) ->
+        item = $(item)
+        item.children('a').html(upcase(item.data('type')))
 
 # The user has changed the dimensions of the image, and we're going to need to update things
 onDimensionChange = (event) ->
-    event.preventDefault
+    event.preventDefault()
     value = $(event.target)
     btnGroup = value.parents('.btn-group')
     btnGroup.find('.master-label').text(value.text())
-    clearWorldState
+    clearWorldState()
+
+# Capitalise the first character of a string
+upcase = (string) ->
+    string.charAt(0).toUpperCase() + string.substr(1)
 
 # Set up the state of the entire app
 init = ->
@@ -82,8 +94,11 @@ init = ->
         $('#dropdown-height, #dropdown-width').children('.dropdown-menu').find('a').click onDimensionChange
 
         $('a', '#heightmaps').click (event) ->
-            event.preventDefault
+            event.preventDefault()
             setActiveField $(event.target).parent('li')
+
+        $('#clear').click onClearClick
+            
         
     else
         # TODO - provide sensible errors

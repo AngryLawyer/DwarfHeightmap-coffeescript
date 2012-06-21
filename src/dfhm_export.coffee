@@ -194,7 +194,7 @@ templates =
 pixelDataToMap = (width, height, tag, pixelData) ->
     map = ''
     for row in [0..height-1]
-        rowString = '    ['+tag
+        rowString = '    ['+tag.toUpperCase()
         for i in [row*width*4..((row+1)*width*4) - 1] by 4
             rowString += ':'+pixelData[i]
         rowString += ']\n'
@@ -206,7 +206,7 @@ window.DFHMExport =
         exportData = templates.boilerplate width, height, templates[template]
         heightmaps = for field, imageData of params
             if imageData != false
-                pixelDataToMap width, height, field, imageData.data
+                pixelDataToMap width, height, field, imageData.data #TODO: This call should lookup the correct field name
             else
                 ''
         exportData + heightmaps.join('')

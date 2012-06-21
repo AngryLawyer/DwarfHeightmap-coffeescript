@@ -117,7 +117,7 @@
     var i, map, row, rowString, _i, _j, _ref, _ref1, _ref2;
     map = '';
     for (row = _i = 0, _ref = height - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; row = 0 <= _ref ? ++_i : --_i) {
-      rowString = '    [' + tag;
+      rowString = '    [' + tag.toUpperCase();
       for (i = _j = _ref1 = row * width * 4, _ref2 = ((row + 1) * width * 4) - 1; _j <= _ref2; i = _j += 4) {
         rowString += ':' + pixelData[i];
       }

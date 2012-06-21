@@ -19,10 +19,18 @@ onClearClick = (event) ->
     clearWorldState()
 
 onExportClick = (event) ->
-    $('#output-text').text (DFHMExport.export determineSize(), worldState)
+    {width: width, height: height} = getDimensions()
+    $('#output-text').text(DFHMExport.export width, height, determineSize(), worldState)
     
 determineSize = () ->
-    #TODO: Actually work it out
+    {width: width, height: height} = getDimensions()
+    smallest = Math.min parseInt(width), parseInt(height)
+    switch smallest
+        when 17 then 'boilerplateTiny'
+        when 33 then 'boilerplateSmaller'
+        when 65 then 'boilerplateSmall'
+        when 129 then 'boilerplateMedium'
+        when 257 then 'boilerplateLarge'
 
 # An image has been loaded
 onImageLoaded = (event, stateField) ->

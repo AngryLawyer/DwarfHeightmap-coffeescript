@@ -1,6 +1,8 @@
 # Assign the jQuery variable
 
 # TODO: Orthographic precipitation trigger
+# TODO: Offset for each heightmap
+# TODO: 'Step' for each colour level (contrast)?
 
 $ = jQuery
 #canvas = null
@@ -15,7 +17,12 @@ worldState =
 onClearClick = (event) ->
     event.preventDefault()
     clearWorldState()
+
+onExportClick = (event) ->
+    $('#output-text').text (DFHMExport.export determineSize(), worldState)
     
+determineSize = () ->
+    #TODO: Actually work it out
 
 # An image has been loaded
 onImageLoaded = (event, stateField) ->
@@ -98,6 +105,7 @@ init = ->
             setActiveField $(event.target).parent('li')
 
         $('#clear').click onClearClick
+        $('#export').click onExportClick
             
         
     else

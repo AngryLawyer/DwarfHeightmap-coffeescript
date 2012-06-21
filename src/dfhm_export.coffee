@@ -200,3 +200,5 @@ window.DFHMExport =
             rowString += ']\n'
             map += rowString
         map
+    export: (params) ->
+        

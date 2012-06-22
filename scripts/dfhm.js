@@ -9,7 +9,8 @@
     temperature: false,
     rainfall: false,
     drainage: false,
-    savagery: false
+    savagery: false,
+    volcanicity: false
   };
 
   onClearClick = function(event) {
@@ -96,7 +97,7 @@
   };
 
   clearWorldState = function() {
-    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = false;
+    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = worldState.volcanicity = false;
     return $('#heightmaps').children('.hm-option').each(function(index, item) {
       item = $(item);
       return item.children('a').html(upcase(item.data('type')));

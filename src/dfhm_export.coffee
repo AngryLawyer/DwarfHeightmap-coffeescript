@@ -191,22 +191,32 @@ templates =
 
     """
 
+# TODO: This sometimes causes errors on 257?
 pixelDataToMap = (width, height, tag, pixelData) ->
     map = ''
     for row in [0..height-1]
-        rowString = '    ['+tag.toUpperCase()
+        rowString = '    ['+tag
         for i in [row*width*4..((row+1)*width*4) - 1] by 4
             rowString += ':'+pixelData[i]
         rowString += ']\n'
         map += rowString
     map
 
+lookupFieldPrefix = (field) ->
+    switch field
+        when 'elevation' then 'PS_EL'
+        when 'rainfall' then 'PS_RF'
+        when 'temperature' then 'PS_TP'
+        when 'drainage' then 'PS_DR'
+        when 'savagery' then 'PS_SV'
+        when 'volcanicity' then 'PS_VL'
+
 window.DFHMExport =
     export: (width, height, template, params) ->
         exportData = templates.boilerplate width, height, templates[template]
         heightmaps = for field, imageData of params
             if imageData != false
-                pixelDataToMap width, height, field, imageData.data #TODO: This call should lookup the correct field name
+                pixelDataToMap width, height, lookupFieldPrefix(field), imageData.data #TODO: This call should lookup the correct field name
             else
                 ''
         exportData + heightmaps.join('')

@@ -13,6 +13,7 @@ worldState =
     rainfall: false
     drainage: false
     savagery: false
+    volcanicity: false
 
 onClearClick = (event) ->
     event.preventDefault()
@@ -83,7 +84,7 @@ getDimensions = ->
 
 # Dimensions have changed, so the current world state is unusable
 clearWorldState = ->
-    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = false
+    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = worldState.volcanicity = false
     $('#heightmaps').children('.hm-option').each (index, item) ->
         item = $(item)
         item.children('a').html(upcase(item.data('type')))

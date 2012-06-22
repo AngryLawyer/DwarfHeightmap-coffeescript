@@ -38,9 +38,8 @@ onImageLoaded = (event, stateField) ->
     {width: width, height:height} = getDimensions()
     dummyImage = new Image()
     dummyImage.onload = ->
-        worldState[stateField] = DFHMImport.toGreyscale dummyImage, width, height
+        worldState[stateField] = DFHMImport.toHeightValue dummyImage, width, height, stateField
         markFieldAsPopulated stateField
-        #$('#output-text').text(boilerplate(17, 17, boilerplateTiny) + pixelDataToMap(17, 17, 'PS_EL', ctx.getImageData(0,0,17,17).data))
 
     dummyImage.src = event.target.result
 

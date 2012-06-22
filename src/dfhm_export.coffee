@@ -150,7 +150,7 @@ templates =
             [REGION_COUNTS:OCEAN:0:0:0]
             [REGION_COUNTS:GLACIER:0:0:0]
             [REGION_COUNTS:TUNDRA:0:0:0]
-            [REGION_COUnTS:GRASSLAND:0:0:0]
+            [REGION_COUNTS:GRASSLAND:0:0:0]
             [REGION_COUNTS:HILLS:0:0:0]
             [EROSION_CYCLE_COUNT:250]
             [RIVER_MINS:0:0]
@@ -192,12 +192,12 @@ templates =
     """
 
 # TODO: This sometimes causes errors on 257?
-pixelDataToMap = (width, height, tag, pixelData) ->
+pixelDataToMap = (width, height, tag, heightData) ->
     map = ''
     for row in [0..height-1]
         rowString = '    ['+tag
-        for i in [row*width*4..((row+1)*width*4) - 1] by 4
-            rowString += ':'+pixelData[i]
+        for i in [row*width..((row+1)*width) - 1]
+            rowString += ':'+ Math.round(heightData[i])
         rowString += ']\n'
         map += rowString
     map
@@ -216,7 +216,7 @@ window.DFHMExport =
         exportData = templates.boilerplate width, height, templates[template]
         heightmaps = for field, imageData of params
             if imageData != false
-                pixelDataToMap width, height, lookupFieldPrefix(field), imageData.data #TODO: This call should lookup the correct field name
+                pixelDataToMap width, height, lookupFieldPrefix(field), imageData
             else
                 ''
         exportData + heightmaps.join('')

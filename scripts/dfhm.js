@@ -47,7 +47,7 @@
     _ref = getDimensions(), width = _ref.width, height = _ref.height;
     dummyImage = new Image();
     dummyImage.onload = function() {
-      worldState[stateField] = DFHMImport.toGreyscale(dummyImage, width, height);
+      worldState[stateField] = DFHMImport.toHeightValue(dummyImage, width, height, stateField);
       return markFieldAsPopulated(stateField);
     };
     return dummyImage.src = event.target.result;

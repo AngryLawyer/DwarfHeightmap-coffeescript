@@ -4,6 +4,24 @@
 
   $ = jQuery;
 
+  window.ratios = {
+    elevation: 1.56863,
+    temperature: 0.19608,
+    rainfall: 0.39215,
+    drainage: 0.39215,
+    savagery: 0.39215,
+    volcanicity: 0.39215
+  };
+
+  window.offsets = {
+    elevation: 0,
+    temperature: 25,
+    rainfall: 0,
+    drainage: 0,
+    savagery: 0,
+    volcanicity: 0
+  };
+
   worldState = {
     elevation: false,
     temperature: false,
@@ -48,7 +66,8 @@
     dummyImage = new Image();
     dummyImage.onload = function() {
       worldState[stateField] = DFHMImport.toHeightValue(dummyImage, width, height, stateField);
-      return markFieldAsPopulated(stateField);
+      markFieldAsPopulated(stateField);
+      return DFHMPreview.renderElevation(worldState[stateField], width, height);
     };
     return dummyImage.src = event.target.result;
   };

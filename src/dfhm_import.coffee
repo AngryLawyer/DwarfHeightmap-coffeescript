@@ -3,26 +3,13 @@
 pixelToGreyscale = (r, g, b) ->
     (r * 0.299) + (g * 0.587) + (b * 0.114)
 
-ratios =
-    elevation: 1.56863
-    temperature: 0.19608
-    rainfall: 0.39215
-    drainage: 0.39215
-    savagery: 0.39215
-    volcanicity: 0.39215
-
-offsets =
-    elevation: 0
-    temperature: 25
-    rainfall: 0
-    drainage: 0
-    savagery: 0
-    volcanicity: 0
 
 window.DFHMImport =
     toHeightValue: (image, width, height, type) ->
 
         canvas = $('<canvas/>')[0]
+        canvas.width = width
+        canvas.height = height
         ctx = canvas.getContext '2d'
         ctx.clearRect 0, 0, width, height
         ctx.drawImage image, 0, 0, width, height
@@ -30,9 +17,10 @@ window.DFHMImport =
         length = imageData.data.length
 
         # Pick out the conversion ratio
-        ratio = ratios[type]
+        ratio = window.ratios[type]
         # Pick out the offset
-        offset = offsets[type]
+        offset = window.offsets[type]
 
-        for i in [0..length] by 4
+        logged = false
+        for i in [0...length] by 4
             ((pixelToGreyscale imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) * ratio) + offset

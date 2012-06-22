@@ -191,13 +191,13 @@ templates =
 
     """
 
-# TODO: This sometimes causes errors on 257?
+# TODO: This is very broken
 pixelDataToMap = (width, height, tag, heightData) ->
     map = ''
-    for row in [0..height-1]
+    for row in [0...height]
         rowString = '    ['+tag
-        for i in [row*width..((row+1)*width) - 1]
-            rowString += ':'+ Math.round(heightData[i])
+        for column in [0...width]
+            rowString += ':'+ Math.round(heightData[(row*height)+column])
         rowString += ']\n'
         map += rowString
     map

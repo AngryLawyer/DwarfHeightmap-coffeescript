@@ -114,12 +114,12 @@
   };
 
   pixelDataToMap = function(width, height, tag, heightData) {
-    var i, map, row, rowString, _i, _j, _ref, _ref1, _ref2;
+    var column, map, row, rowString, _i, _j;
     map = '';
-    for (row = _i = 0, _ref = height - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; row = 0 <= _ref ? ++_i : --_i) {
+    for (row = _i = 0; 0 <= height ? _i < height : _i > height; row = 0 <= height ? ++_i : --_i) {
       rowString = '    [' + tag;
-      for (i = _j = _ref1 = row * width, _ref2 = ((row + 1) * width) - 1; _ref1 <= _ref2 ? _j <= _ref2 : _j >= _ref2; i = _ref1 <= _ref2 ? ++_j : --_j) {
-        rowString += ':' + Math.round(heightData[i]);
+      for (column = _j = 0; 0 <= width ? _j < width : _j > width; column = 0 <= width ? ++_j : --_j) {
+        rowString += ':' + Math.round(heightData[(row * height) + column]);
       }
       rowString += ']\n';
       map += rowString;

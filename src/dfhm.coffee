@@ -7,6 +7,22 @@
 $ = jQuery
 #canvas = null
 
+window.ratios =
+    elevation: 1.56863
+    temperature: 0.19608
+    rainfall: 0.39215
+    drainage: 0.39215
+    savagery: 0.39215
+    volcanicity: 0.39215
+
+window.offsets =
+    elevation: 0
+    temperature: 25
+    rainfall: 0
+    drainage: 0
+    savagery: 0
+    volcanicity: 0
+
 worldState =
     elevation: false
     temperature: false
@@ -40,6 +56,7 @@ onImageLoaded = (event, stateField) ->
     dummyImage.onload = ->
         worldState[stateField] = DFHMImport.toHeightValue dummyImage, width, height, stateField
         markFieldAsPopulated stateField
+        DFHMPreview.renderElevation worldState[stateField], width, height
 
     dummyImage.src = event.target.result
 

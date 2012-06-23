@@ -1,7 +1,7 @@
 # Code to aid in the exporting of DFHM stuff
 templates =
     boilerplateLarge:
-        BEAST_END_YEAR: "300:80"
+        BEAST_END_YEAR: '300:80'
         MEGABEAST_CAP: 75
         SEMIMEGABEAST_CAP: 150
         TITAN_NUMBER: 33
@@ -15,11 +15,32 @@ templates =
         DISTURBANCE_INTERACTION_NUMBER: 52
         EVIL_CLOUD_NUMBER: 26
         EVIL_RAIN_NUMBER: 26
-        GOOD_SQ_COUNTS: "24:244:0"
-        EVIL_SQ_COUNTS: "24:244:0"
+        GOOD_SQ_COUNTS: '24:244:0'
+        EVIL_SQ_COUNTS: '24:244:0'
         SUBREGION_MAX: 3500
         TOTAL_CIV_NUMBER: 40
         SITE_CAP: 1500
+        ELEVATION: '1:400:800:800'
+        RAINFALL: '0:100:400:400'
+        TEMPERATURE: '25:75:400:400'
+        DRAINAGE: '0:100:400:400'
+        VOLCANISM: '0:100:400:400'
+        SAVAGERY: '0:100:400:400'
+        REGION_COUNTS_SWAMP: '1032:7:6'
+        REGION_COUNTS_DESERT:'1032:7:6'
+        REGION_COUNTS_FOREST:'4128:13:12'
+        REGION_COUNTS_MOUNTAINS:'8256:9:9'
+        REGION_COUNTS_OCEAN:'8256:7:6'
+        REGION_COUNTS_GLACIER:'0:0:0'
+        REGION_COUNTS_TUNDRA:'0:0:0'
+        REGION_COUNTS_GRASSLAND:'8256:13:12'
+        REGION_COUNTS_HILLS:'8256:13:12'
+        ELEVATION_RANGES:'8256:16512:8256'
+        RAIN_RANGES:'8256:16512:8256'
+        DRAINAGE_RANGES:'8256:16512:8256'
+        SAVAGERY_RANGES:'8256:16512:8256'
+        VOLCANISM_RANGES:'8256:16512:8256'
+
     boilerplateMedium:
         BEAST_END_YEAR: '200:80'
         MEGABEAST_CAP: 18
@@ -40,6 +61,27 @@ templates =
         SUBREGION_MAX: 2750
         TOTAL_CIV_NUMBER: 40
         SITE_CAP: 1040
+        ELEVATION:'1:400:401:401'
+        RAINFALL:'0:100:200:200'
+        TEMPERATURE:'25:75:200:200'
+        DRAINAGE:'0:100:200:200'
+        VOLCANISM:'0:100:200:200'
+        SAVAGERY:'0:100:200:200'
+        REGION_COUNTS_SWAMP:'260:1:1'
+        REGION_COUNTS_DESERT:'260:1:1'
+        REGION_COUNTS_FOREST:'1040:3:3'
+        REGION_COUNTS_MOUNTAINS:'2080:2:2'
+        REGION_COUNTS_OCEAN:'2080:1:1'
+        REGION_COUNTS_GLACIER:'0:0:0'
+        REGION_COUNTS_TUNDRA:'0:0:0'
+        REGION_COUNTS_GRASSLAND:'2080:3:3'
+        REGION_COUNTS_HILLS:'2080:3:3'
+        ELEVATION_RANGES:'2080:4160:2080'
+        RAIN_RANGES:'2080:4160:2080'
+        DRAINAGE_RANGES:'2080:4160:2080'
+        SAVAGERY_RANGES:'2080:4160:2080'
+        VOLCANISM_RANGES:'2080:4160:2080'
+
     boilerplateSmall:
         BEAST_END_YEAR: '100:80'
         MEGABEAST_CAP: 4
@@ -60,6 +102,26 @@ templates =
         SUBREGION_MAX: 2750
         TOTAL_CIV_NUMBER: 10
         SITE_CAP: 264
+        ELEVATION:'1:400:202:202'
+        RAINFALL:'0:100:101:101'
+        TEMPERATURE:'25:75:101:101'
+        DRAINAGE:'0:100:101:101'
+        VOLCANISM:'0:100:101:101'
+        SAVAGERY:'0:100:101:101'
+        REGION_COUNTS_SWAMP:'66:0:0'
+        REGION_COUNTS_DESERT:'66:0:0'
+        REGION_COUNTS_FOREST:'264:0:0'
+        REGION_COUNTS_MOUNTAINS:'528:0:0'
+        REGION_COUNTS_OCEAN:'528:0:0'
+        REGION_COUNTS_GLACIER:'0:0:0'
+        REGION_COUNTS_TUNDRA:'0:0:0'
+        REGION_COUNTS_GRASSLAND:'528:0:0'
+        REGION_COUNTS_HILLS:'528:0:0'
+        ELEVATION_RANGES:'528:1056:528'
+        RAIN_RANGES:'264:528:264'
+        DRAINAGE_RANGES:'264:528:264'
+        SAVAGERY_RANGES:'264:528:264'
+        VOLCANISM_RANGES:'264:528:264'
     boilerplateSmaller:
         BEAST_END_YEAR: '50:80'
         MEGABEAST_CAP: 1
@@ -80,6 +142,26 @@ templates =
         SUBREGION_MAX: 2750
         TOTAL_CIV_NUMBER: 5
         SITE_CAP: 68
+        ELEVATION:'1:400:102:102'
+        RAINFALL:'0:100:51:51'
+        TEMPERATURE:'25:75:51:51'
+        DRAINAGE:'0:100:51:51'
+        VOLCANISM:'0:100:51:51'
+        SAVAGERY:'0:100:51:51'
+        REGION_COUNTS_SWAMP:'0:0:0'
+        REGION_COUNTS_DESERT:'0:0:0'
+        REGION_COUNTS_FOREST:'0:0:0'
+        REGION_COUNTS_MOUNTAINS:'0:0:0'
+        REGION_COUNTS_OCEAN:'0:0:0'
+        REGION_COUNTS_GLACIER:'0:0:0'
+        REGION_COUNTS_TUNDRA:'0:0:0'
+        REGION_COUNTS_GRASSLAND:'0:0:0'
+        REGION_COUNTS_HILLS:'0:0:0'
+        ELEVATION_RANGES:'136:272:136'
+        RAIN_RANGES:'0:0:0'
+        DRAINAGE_RANGES:'0:0:0'
+        SAVAGERY_RANGES:'0:0:0'
+        VOLCANISM_RANGES:'0:0:0'
     boilerplateTiny:
         BEAST_END_YEAR: '30:80'
         MEGABEAST_CAP: 1
@@ -100,6 +182,26 @@ templates =
         SUBREGION_MAX: 2750
         TOTAL_CIV_NUMBER: 5
         SITE_CAP: 18
+        ELEVATION:'1:400:52:52'
+        RAINFALL:'0:100:26:26'
+        TEMPERATURE:'25:75:26:26'
+        DRAINAGE:'0:100:26:26'
+        VOLCANISM:'0:100:26:26'
+        SAVAGERY:'0:100:26:26'
+        REGION_COUNTS_SWAMP:'0:0:0'
+        REGION_COUNTS_DESERT:'0:0:0'
+        REGION_COUNTS_FOREST:'0:0:0'
+        REGION_COUNTS_MOUNTAINS:'0:0:0'
+        REGION_COUNTS_OCEAN:'0:0:0'
+        REGION_COUNTS_GLACIER:'0:0:0'
+        REGION_COUNTS_TUNDRA:'0:0:0'
+        REGION_COUNTS_GRASSLAND:'0:0:0'
+        REGION_COUNTS_HILLS:'0:0:0'
+        ELEVATION_RANGES:'36:72:36'
+        RAIN_RANGES:'0:0:0'
+        DRAINAGE_RANGES:'0:0:0'
+        SAVAGERY_RANGES:'0:0:0'
+        VOLCANISM_RANGES:'0:0:0'
     boilerplate: (width, height, params) ->
         """
         [WORLD_GEN]
@@ -110,12 +212,12 @@ templates =
             [BEAST_END_YEAR:#{params.BEAST_END_YEAR}]
             [REVEAL_ALL_HISTORY:1]
             [CULL_HISTORICAL_FIGURES:0]
-            [ELEVATION:0:0:0:0]
-            [RAINFALL:0:0:0:0]
-            [TEMPERATURE:0:0:0:0]
-            [DRAINAGE:0:0:0:0]
-            [VOLCANISM:0:0:0:0]
-            [SAVAGERY:0:0:0:0]
+            [ELEVATION:#{params.ELEVATION}]
+            [RAINFALL:#{params.RAINFALL}]
+            [TEMPERATURE:#{params.TEMPERATURE}]
+            [DRAINAGE:#{params.DRAINAGE}]
+            [VOLCANISM:#{params.VOLCANISM}]
+            [SAVAGERY:#{params.SAVAGERY}]
             [ELEVATION_FREQUENCY:1:1:1:1:1:1]
             [RAIN_FREQUENCY:1:1:1:1:1:1]
             [DRAINAGE_FREQUENCY:1:1:1:1:1:1]
@@ -143,15 +245,15 @@ templates =
             [PARTIAL_OCEAN_EDGE_MIN:0]
             [COMPLETE_OCEAN_EDGE_MIN:0]
             [VOLCANO_MIN:0]
-            [REGION_COUNTS:SWAMP:0:0:0]
-            [REGION_COUNTS:DESERT:0:0:0]
-            [REGION_COUNTS:FOREST:0:0:0]
-            [REGION_COUNTS:MOUNTAINS:0:0:0]
-            [REGION_COUNTS:OCEAN:0:0:0]
-            [REGION_COUNTS:GLACIER:0:0:0]
-            [REGION_COUNTS:TUNDRA:0:0:0]
-            [REGION_COUNTS:GRASSLAND:0:0:0]
-            [REGION_COUNTS:HILLS:0:0:0]
+            [REGION_COUNTS:SWAMP:#{params.REGION_COUNTS_SWAMP}]
+            [REGION_COUNTS:DESERT:#{params.REGION_COUNTS_DESERT}]
+            [REGION_COUNTS:FOREST:#{params.REGION_COUNTS_FOREST}]
+            [REGION_COUNTS:MOUNTAINS:#{params.REGION_COUNTS_MOUNTAINS}]
+            [REGION_COUNTS:OCEAN:#{params.REGION_COUNTS_OCEAN}]
+            [REGION_COUNTS:GLACIER:#{params.REGION_COUNTS_GLACIER}]
+            [REGION_COUNTS:TUNDRA:#{params.REGION_COUNTS_TUNDRA}]
+            [REGION_COUNTS:GRASSLAND:#{params.REGION_COUNTS_GRASSLAND}]
+            [REGION_COUNTS:HILLS:#{params.REGION_COUNTS_HILLS}]
             [EROSION_CYCLE_COUNT:250]
             [RIVER_MINS:0:0]
             [PERIODICALLY_ERODE_EXTREMES:1]
@@ -183,15 +285,14 @@ templates =
             [TOTAL_CIV_POPULATION:15000]
             [SITE_CAP:#{params.SITE_CAP}]
             [PLAYABLE_CIVILIZATION_REQUIRED:1]
-            [ELEVATION_RANGES:0:0:0]
-            [RAIN_RANGES:0:0:0]
-            [DRAINAGE_RANGES:0:0:0]
-            [SAVAGERY_RANGES:0:0:0]
-            [VOLCANISM_RANGES:0:0:0]
+            [ELEVATION_RANGES:#{params.ELEVATION_RANGES}]
+            [RAIN_RANGES:#{params.RAIN_RANGES}]
+            [DRAINAGE_RANGES:#{params.DRAINAGE_RANGES}]
+            [SAVAGERY_RANGES:#{params.SAVAGERY_RANGES}]
+            [VOLCANISM_RANGES:#{params.VOLCANISM_RANGES}]
 
     """
 
-# TODO: This is very broken
 pixelDataToMap = (width, height, tag, heightData) ->
     map = ''
     for row in [0...height]

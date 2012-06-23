@@ -34,13 +34,14 @@ window.DFHMPreview =
             imageData.data[target+2] = b
             imageData.data[target+3] = 255
 
+        ctx.putImageData imageData, 0, 0
 
         targetCanvas = $('#preview')[0]
         targetWidth = targetCanvas.width
         targetHeight = targetCanvas.height
         ctx = targetCanvas.getContext '2d'
         ctx.clearRect 0, 0, targetWidth, targetHeight
-        ctx.putImageData imageData, 0, 0, targetWidth, targetHeight #TODO Resize
+        ctx.drawImage canvas, 0, 0, targetWidth, targetHeight
         #Do something!
     renderOther: (data, elevation) ->
         #Do something!

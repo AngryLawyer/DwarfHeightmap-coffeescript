@@ -56,7 +56,8 @@ onImageLoaded = (event, stateField) ->
     dummyImage.onload = ->
         worldState[stateField] = DFHMImport.toHeightValue dummyImage, width, height, stateField
         markFieldAsPopulated stateField
-        DFHMPreview.renderElevation worldState[stateField], width, height
+        if stateField == 'elevation'
+            DFHMPreview.renderElevation worldState[stateField], width, height
 
     dummyImage.src = event.target.result
 
@@ -86,7 +87,14 @@ getFieldRenderer = (field) ->
 
 # Set the active field
 setActiveField = (field) ->
-    $(field).addClass('active').siblings().removeClass('active')
+    field = $(field)
+    field.addClass('active').siblings().removeClass('active')
+    {width: width, height:height} = getDimensions()
+    if field.data('type') == 'elevation'
+        DFHMPreview.renderElevation worldState['elevation'], width, height
+    else
+        DFHMPreview.renderOther worldState[field.data('type')], worldState['elevation'], width, height
+    
 
 # Get the currently used type
 getActiveField = ->

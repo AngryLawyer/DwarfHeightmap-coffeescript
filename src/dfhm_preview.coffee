@@ -14,7 +14,7 @@ processElevationPixel = (brightness) ->
         #Peak
         {r: 255, g: 255, b: 255}
 
-window.DFHMPreview =
+window.DFHMPreview = #TODO: Short-circuit when empty
     renderElevation: (data, width, height) ->
         canvas = $('<canvas/>')[0]
         canvas.width = width
@@ -43,5 +43,10 @@ window.DFHMPreview =
         ctx.clearRect 0, 0, targetWidth, targetHeight
         ctx.drawImage canvas, 0, 0, targetWidth, targetHeight
         #Do something!
-    renderOther: (data, elevation) ->
+    renderOther: (data, elevation, width, height) ->
+        canvas = $('#preview')[0]
+        canvas.width = width
+        canvas.height = height
+        ctx = canvas.getContext '2d'
+        ctx.clearRect 0, 0, width, height
         #Do something!

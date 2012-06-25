@@ -67,7 +67,9 @@
     dummyImage.onload = function() {
       worldState[stateField] = DFHMImport.toHeightValue(dummyImage, width, height, stateField);
       markFieldAsPopulated(stateField);
-      return DFHMPreview.renderElevation(worldState[stateField], width, height);
+      if (stateField === 'elevation') {
+        return DFHMPreview.renderElevation(worldState[stateField], width, height);
+      }
     };
     return dummyImage.src = event.target.result;
   };
@@ -100,7 +102,15 @@
   };
 
   setActiveField = function(field) {
-    return $(field).addClass('active').siblings().removeClass('active');
+    var height, width, _ref;
+    field = $(field);
+    field.addClass('active').siblings().removeClass('active');
+    _ref = getDimensions(), width = _ref.width, height = _ref.height;
+    if (field.data('type') === 'elevation') {
+      return DFHMPreview.renderElevation(worldState['elevation'], width, height);
+    } else {
+      return DFHMPreview.renderOther(worldState[field.data('type')], worldState['elevation'], width, height);
+    }
   };
 
   getActiveField = function() {

@@ -57,7 +57,14 @@
       ctx.clearRect(0, 0, targetWidth, targetHeight);
       return ctx.drawImage(canvas, 0, 0, targetWidth, targetHeight);
     },
-    renderOther: function(data, elevation) {}
+    renderOther: function(data, elevation, width, height) {
+      var canvas, ctx;
+      canvas = $('#preview')[0];
+      canvas.width = width;
+      canvas.height = height;
+      ctx = canvas.getContext('2d');
+      return ctx.clearRect(0, 0, width, height);
+    }
   };
 
 }).call(this);

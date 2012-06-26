@@ -257,7 +257,7 @@ templates =
             [EROSION_CYCLE_COUNT:250]
             [RIVER_MINS:0:0]
             [PERIODICALLY_ERODE_EXTREMES:1]
-            [OROGRAPHIC_PRECIPITATION:0]
+            [OROGRAPHIC_PRECIPITATION:1]
             [SUBREGION_MAX:#{params.SUBREGION_MAX}]
             [CAVERN_LAYER_COUNT:3]
             [CAVERN_LAYER_OPENNESS_MIN:0]

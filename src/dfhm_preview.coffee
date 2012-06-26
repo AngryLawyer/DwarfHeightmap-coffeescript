@@ -14,6 +14,9 @@ processElevationPixel = (brightness) ->
         #Peak
         {r: 255, g: 255, b: 255}
 
+processOverlayPixel = (overlay, height) ->
+    {r: height, g: height - overlay, b: height - overlay}
+
 window.DFHMPreview = #TODO: Short-circuit when empty
     renderElevation: (data, width, height) ->
         canvas = $('<canvas/>')[0]
@@ -43,10 +46,32 @@ window.DFHMPreview = #TODO: Short-circuit when empty
         ctx.clearRect 0, 0, targetWidth, targetHeight
         ctx.drawImage canvas, 0, 0, targetWidth, targetHeight
         #Do something!
+
     renderOther: (data, elevation, width, height) ->
-        canvas = $('#preview')[0]
+        canvas = $('<canvas/>')[0]
         canvas.width = width
         canvas.height = height
         ctx = canvas.getContext '2d'
         ctx.clearRect 0, 0, width, height
+
+        imageData = ctx.getImageData 0, 0, width, height
+        srcLength = data.length
+        length = imageData.data.length
+        
+        for i in [0...srcLength]
+            target = i * 4
+            {r: r, g: g, b: b} = processOverlayPixel(data[i], elevation[i])
+            imageData.data[target] = r
+            imageData.data[target+1] = g
+            imageData.data[target+2] = b
+            imageData.data[target+3] = 255
+
+        ctx.putImageData imageData, 0, 0
+
+        targetCanvas = $('#preview')[0]
+        targetWidth = targetCanvas.width
+        targetHeight = targetCanvas.height
+        ctx = targetCanvas.getContext '2d'
+        ctx.clearRect 0, 0, targetWidth, targetHeight
+        ctx.drawImage canvas, 0, 0, targetWidth, targetHeight
         #Do something!

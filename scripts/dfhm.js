@@ -69,6 +69,8 @@
       markFieldAsPopulated(stateField);
       if (stateField === 'elevation') {
         return DFHMPreview.renderElevation(worldState[stateField], width, height);
+      } else {
+        return DFHMPreview.renderOther(worldState[stateField], worldState['elevation'], width, height);
       }
     };
     return dummyImage.src = event.target.result;

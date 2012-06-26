@@ -58,6 +58,8 @@ onImageLoaded = (event, stateField) ->
         markFieldAsPopulated stateField
         if stateField == 'elevation'
             DFHMPreview.renderElevation worldState[stateField], width, height
+        else
+            DFHMPreview.renderOther worldState[stateField], worldState['elevation'], width, height
 
     dummyImage.src = event.target.result
 

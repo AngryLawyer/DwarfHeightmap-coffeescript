@@ -127,6 +127,10 @@ onDimensionChange = (event) ->
 upcase = (string) ->
     string.charAt(0).toUpperCase() + string.substr(1)
 
+# Create an alert box on the page
+alertBox = (type, highlight, text) ->
+    $('#alerts').prepend "<div class=\"alert alert-#{type}\"><a class=\"close\" data-dismiss=\"alert\" href=\"#\">x</a><strong>#{highlight}</strong> #{text}</div>"
+
 # Set up the state of the entire app
 init = ->
     if window.File and window.FileReader
@@ -144,7 +148,6 @@ init = ->
             
         
     else
-        # TODO - provide sensible errors
-        alert "noes"
+        alertBox "error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to somethign more modern and we can get on with it."
 
 $(document).ready init

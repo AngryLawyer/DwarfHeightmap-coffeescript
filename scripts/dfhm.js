@@ -88,7 +88,7 @@
         };
         return reader.readAsDataURL(file);
       } else {
-        return alert("Not an image");
+        return alertBox("error", "This is not a recognised image", "- you might want to try opening it in a graphics editor to check it's okay.");
       }
     }
   };
@@ -161,7 +161,11 @@
         return setActiveField($(event.target).parent('li'));
       });
       $('#clear').click(onClearClick);
-      return $('#export').click(onExportClick);
+      $('#export').click(onExportClick);
+      $('#output-text').click(function() {
+        return $(this).select();
+      });
+      return alertBox("info", "Hi there!", "To get generating heightmaps, pick a map size, select a field, and import some images! The preview box will update to show you\nwhat the map will look like - feel free to change some of the advanced variables to get closer to what you want. When you're done, hit Export, and copy the wall of text into data/init/world_gen.txt");
     } else {
       return alertBox("error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to somethign more modern and we can get on with it.");
     }

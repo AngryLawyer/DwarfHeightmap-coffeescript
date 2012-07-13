@@ -104,9 +104,9 @@ setActiveField = (field) ->
     field.addClass('active').siblings().removeClass('active')
     {width: width, height:height} = getDimensions()
     if field.data('type') == 'elevation'
-        DFHMPreview.renderElevation worldState['elevation'], width, height
+        DFHMPreview.renderElevation worldState.elevation.data, width, height
     else
-        DFHMPreview.renderOther worldState[field.data('type')], worldState['elevation'], width, height
+        DFHMPreview.renderOther worldState[field.data('type')].data, worldState.elevation.data, width, height
     
 
 # Get the currently used type
@@ -129,7 +129,7 @@ clearWorldState = ->
         item = $(item)
         item.children('a').html(upcase(item.data('type')))
 
-    #TODO: Clear out the renderer, too
+    DFHMPreview.clear()
 
 # The user has changed the dimensions of the image, and we're going to need to update things
 onDimensionChange = (event) ->

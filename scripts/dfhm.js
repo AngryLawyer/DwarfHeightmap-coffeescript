@@ -128,9 +128,9 @@
     field.addClass('active').siblings().removeClass('active');
     _ref = getDimensions(), width = _ref.width, height = _ref.height;
     if (field.data('type') === 'elevation') {
-      return DFHMPreview.renderElevation(worldState['elevation'], width, height);
+      return DFHMPreview.renderElevation(worldState.elevation.data, width, height);
     } else {
-      return DFHMPreview.renderOther(worldState[field.data('type')], worldState['elevation'], width, height);
+      return DFHMPreview.renderOther(worldState[field.data('type')].data, worldState.elevation.data, width, height);
     }
   };
 
@@ -155,10 +155,11 @@
         worldState[elementName][optionName] = false;
       }
     }
-    return $('#heightmaps').children('.hm-option').each(function(index, item) {
+    $('#heightmaps').children('.hm-option').each(function(index, item) {
       item = $(item);
       return item.children('a').html(upcase(item.data('type')));
     });
+    return DFHMPreview.clear();
   };
 
   onDimensionChange = function(event) {

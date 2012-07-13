@@ -1,5 +1,3 @@
-# Assign the jQuery variable
-
 # TODO: Orthographic precipitation trigger
 # TODO: Offset for each heightmap
 # TODO: 'Step' for each colour level (contrast)?
@@ -71,9 +69,9 @@ onImageLoaded = (event, stateField) ->
 
         markFieldAsPopulated stateField
         if stateField == 'elevation'
-            DFHMPreview.renderElevation worldState[stateField][data], width, height
+            DFHMPreview.renderElevation worldState[stateField].data, width, height
         else
-            DFHMPreview.renderOther worldState[stateField][data], worldState['elevation'][data], width, height
+            DFHMPreview.renderOther worldState[stateField].data, worldState['elevation'].data, width, height
 
     dummyImage.src = event.target.result
 
@@ -123,14 +121,15 @@ getDimensions = ->
 
 # Dimensions have changed, so the current world state is unusable
 clearWorldState = ->
-
-    for element in worldState
-        for option in element
-            worldstate[element][option] = false
+    for elementName, elementVal of worldState
+        for optionName, optionVal of elementVal
+            worldState[elementName][optionName] = false
 
     $('#heightmaps').children('.hm-option').each (index, item) ->
         item = $(item)
         item.children('a').html(upcase(item.data('type')))
+
+    #TODO: Clear out the renderer, too
 
 # The user has changed the dimensions of the image, and we're going to need to update things
 onDimensionChange = (event) ->
@@ -138,7 +137,22 @@ onDimensionChange = (event) ->
     value = $(event.target)
     btnGroup = value.parents('.btn-group')
     btnGroup.find('.master-label').text(value.text())
-    clearWorldState()
+    regenerateAll()
+
+# Dimensions or similar have changed, so regen all available
+regenerateAll = () ->
+    {width: width, height: height} = getDimensions()
+
+    for stateField, element of worldState
+        if element.image != false
+            element.data = DFHMImport.toHeightValue element.image, width, height, stateField
+
+    activeField = getActiveField()
+
+    if activeField == 'elevation'
+        DFHMPreview.renderElevation worldState[activeField].data, width, height
+    else
+        DFHMPreview.renderOther worldState[activeField].data, worldState['elevation'].data, width, height
 
 # Capitalise the first character of a string
 upcase = (string) ->

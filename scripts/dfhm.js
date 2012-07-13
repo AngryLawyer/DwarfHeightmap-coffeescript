@@ -23,12 +23,30 @@
   };
 
   worldState = {
-    elevation: false,
-    temperature: false,
-    rainfall: false,
-    drainage: false,
-    savagery: false,
-    volcanicity: false
+    elevation: {
+      image: false,
+      data: false
+    },
+    temperature: {
+      image: false,
+      data: false
+    },
+    rainfall: {
+      image: false,
+      data: false
+    },
+    drainage: {
+      image: false,
+      data: false
+    },
+    savagery: {
+      image: false,
+      data: false
+    },
+    volcanicity: {
+      image: false,
+      data: false
+    }
   };
 
   onClearClick = function(event) {
@@ -65,12 +83,13 @@
     _ref = getDimensions(), width = _ref.width, height = _ref.height;
     dummyImage = new Image();
     dummyImage.onload = function() {
-      worldState[stateField] = DFHMImport.toHeightValue(dummyImage, width, height, stateField);
+      worldState[stateField].image = dummyImage;
+      worldState[stateField].data = DFHMImport.toHeightValue(dummyImage, width, height, stateField);
       markFieldAsPopulated(stateField);
       if (stateField === 'elevation') {
-        return DFHMPreview.renderElevation(worldState[stateField], width, height);
+        return DFHMPreview.renderElevation(worldState[stateField][data], width, height);
       } else {
-        return DFHMPreview.renderOther(worldState[stateField], worldState['elevation'], width, height);
+        return DFHMPreview.renderOther(worldState[stateField][data], worldState['elevation'][data], width, height);
       }
     };
     return dummyImage.src = event.target.result;
@@ -128,7 +147,14 @@
   };
 
   clearWorldState = function() {
-    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = worldState.volcanicity = false;
+    var element, option, _i, _j, _len, _len1;
+    for (_i = 0, _len = worldState.length; _i < _len; _i++) {
+      element = worldState[_i];
+      for (_j = 0, _len1 = element.length; _j < _len1; _j++) {
+        option = element[_j];
+        worldstate[element][option] = false;
+      }
+    }
     return $('#heightmaps').children('.hm-option').each(function(index, item) {
       item = $(item);
       return item.children('a').html(upcase(item.data('type')));
@@ -162,7 +188,7 @@
       });
       $('#clear').click(onClearClick);
       $('#export').click(onExportClick);
-      $('#output-text').click(function() {
+      $('#output-text').focus(function() {
         return $(this).select();
       });
       return alertBox("info", "Hi there!", "To get generating heightmaps, pick a map size, select a field, and import some images! The preview box will update to show you\nwhat the map will look like - feel free to change some of the advanced variables to get closer to what you want. When you're done, hit Export, and copy the wall of text into data/init/world_gen.txt");

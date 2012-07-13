@@ -253,8 +253,8 @@
         _results = [];
         for (field in params) {
           imageData = params[field];
-          if (imageData !== false) {
-            _results.push(pixelDataToMap(width, height, lookupFieldPrefix(field), imageData));
+          if (imageData.data !== false) {
+            _results.push(pixelDataToMap(width, height, lookupFieldPrefix(field), imageData.data));
           } else {
             _results.push('');
           }

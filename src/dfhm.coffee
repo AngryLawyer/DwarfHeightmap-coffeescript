@@ -24,12 +24,24 @@ window.offsets =
     volcanicity: 0
 
 worldState =
-    elevation: false
-    temperature: false
-    rainfall: false
-    drainage: false
-    savagery: false
-    volcanicity: false
+    elevation:
+        image: false
+        data: false
+    temperature:
+        image: false
+        data: false
+    rainfall:
+        image: false
+        data: false
+    drainage:
+        image: false
+        data: false
+    savagery:
+        image: false
+        data: false
+    volcanicity:
+        image: false
+        data: false
 
 onClearClick = (event) ->
     event.preventDefault()
@@ -54,12 +66,14 @@ onImageLoaded = (event, stateField) ->
     {width: width, height:height} = getDimensions()
     dummyImage = new Image()
     dummyImage.onload = ->
-        worldState[stateField] = DFHMImport.toHeightValue dummyImage, width, height, stateField
+        worldState[stateField].image = dummyImage
+        worldState[stateField].data = DFHMImport.toHeightValue dummyImage, width, height, stateField
+
         markFieldAsPopulated stateField
         if stateField == 'elevation'
-            DFHMPreview.renderElevation worldState[stateField], width, height
+            DFHMPreview.renderElevation worldState[stateField][data], width, height
         else
-            DFHMPreview.renderOther worldState[stateField], worldState['elevation'], width, height
+            DFHMPreview.renderOther worldState[stateField][data], worldState['elevation'][data], width, height
 
     dummyImage.src = event.target.result
 
@@ -109,7 +123,11 @@ getDimensions = ->
 
 # Dimensions have changed, so the current world state is unusable
 clearWorldState = ->
-    worldState.elevation = worldState.temperature = worldState.rainfall = worldState.drainage = worldState.savagery = worldState.volcanicity = false
+
+    for element in worldState
+        for option in element
+            worldstate[element][option] = false
+
     $('#heightmaps').children('.hm-option').each (index, item) ->
         item = $(item)
         item.children('a').html(upcase(item.data('type')))

@@ -316,8 +316,8 @@ window.DFHMExport =
     export: (width, height, template, params) ->
         exportData = templates.boilerplate width, height, templates[template]
         heightmaps = for field, imageData of params
-            if imageData != false
-                pixelDataToMap width, height, lookupFieldPrefix(field), imageData
+            if imageData.data != false
+                pixelDataToMap width, height, lookupFieldPrefix(field), imageData.data
             else
                 ''
         exportData + heightmaps.join('')

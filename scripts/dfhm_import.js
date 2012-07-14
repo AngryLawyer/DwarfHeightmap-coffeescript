@@ -7,8 +7,14 @@
   };
 
   window.DFHMImport = {
-    toHeightValue: function(image, width, height, type) {
-      var canvas, ctx, i, imageData, length, logged, offset, ratio, _i, _results;
+    toHeightValue: function(image, width, height, type, ratioOverride, offsetOverride) {
+      var canvas, ctx, i, imageData, length, offset, ratio, _i, _results;
+      if (ratioOverride == null) {
+        ratioOverride = false;
+      }
+      if (offsetOverride == null) {
+        offsetOverride = false;
+      }
       canvas = $('<canvas/>')[0];
       canvas.width = width;
       canvas.height = height;
@@ -18,8 +24,13 @@
       imageData = ctx.getImageData(0, 0, width, height);
       length = imageData.data.length;
       ratio = window.ratios[type];
+      if (ratioOverride !== false) {
+        ratio += ratioOverride;
+      }
       offset = window.offsets[type];
-      logged = false;
+      if (offsetOverride !== false) {
+        offset += offsetOverride;
+      }
       _results = [];
       for (i = _i = 0; _i < length; i = _i += 4) {
         _results.push(((pixelToGreyscale(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) * ratio) + offset);

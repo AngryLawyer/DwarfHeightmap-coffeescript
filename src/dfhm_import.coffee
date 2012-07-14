@@ -5,7 +5,7 @@ pixelToGreyscale = (r, g, b) ->
 
 
 window.DFHMImport =
-    toHeightValue: (image, width, height, type) ->
+    toHeightValue: (image, width, height, type, ratioOverride = false, offsetOverride = false) ->
 
         canvas = $('<canvas/>')[0]
         canvas.width = width
@@ -18,9 +18,14 @@ window.DFHMImport =
 
         # Pick out the conversion ratio
         ratio = window.ratios[type]
+        if (ratioOverride != false)
+            ratio += ratioOverride
+
         # Pick out the offset
         offset = window.offsets[type]
 
-        logged = false
+        if (offsetOverride != false)
+            offset += offsetOverride
+
         for i in [0...length] by 4
             ((pixelToGreyscale imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) * ratio) + offset

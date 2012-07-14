@@ -25,21 +25,33 @@ worldState =
     elevation:
         image: false
         data: false
+        offset: false
+        ratio: false
     temperature:
         image: false
         data: false
+        offset: false
+        ratio: false
     rainfall:
         image: false
         data: false
+        offset: false
+        ratio: false
     drainage:
         image: false
         data: false
+        offset: false
+        ratio: false
     savagery:
         image: false
         data: false
+        offset: false
+        ratio: false
     volcanicity:
         image: false
         data: false
+        offset: false
+        ratio: false
 
 onClearClick = (event) ->
     event.preventDefault()
@@ -66,12 +78,8 @@ onImageLoaded = (event, stateField) ->
     dummyImage.onload = ->
         worldState[stateField].image = dummyImage
         worldState[stateField].data = DFHMImport.toHeightValue dummyImage, width, height, stateField
-
         markFieldAsPopulated stateField
-        if stateField == 'elevation'
-            DFHMPreview.renderElevation worldState[stateField].data, width, height
-        else
-            DFHMPreview.renderOther worldState[stateField].data, worldState['elevation'].data, width, height
+        render stateField
 
     dummyImage.src = event.target.result
 
@@ -103,11 +111,7 @@ setActiveField = (field) ->
     field = $(field)
     field.addClass('active').siblings().removeClass('active')
     {width: width, height:height} = getDimensions()
-    if field.data('type') == 'elevation'
-        DFHMPreview.renderElevation worldState.elevation.data, width, height
-    else
-        DFHMPreview.renderOther worldState[field.data('type')].data, worldState.elevation.data, width, height
-    
+    render field.data('type')
 
 # Get the currently used type
 getActiveField = ->
@@ -139,6 +143,14 @@ onDimensionChange = (event) ->
     btnGroup.find('.master-label').text(value.text())
     regenerateAll()
 
+onRatioChange = (event) ->
+    event.preventDefault()
+    worldstate[getActiveField()].ratio = $(event.target).val()
+
+onOffsetChange = (event) ->
+    event.preventDefault()
+    worldstate[getActiveField()].offset = $(event.target).val()
+
 # Dimensions or similar have changed, so regen all available
 regenerateAll = () ->
     {width: width, height: height} = getDimensions()
@@ -147,7 +159,11 @@ regenerateAll = () ->
         if element.image != false
             element.data = DFHMImport.toHeightValue element.image, width, height, stateField
 
-    activeField = getActiveField()
+    render getActiveField()
+
+# Handle rendering to our world
+render = (activeField) ->
+    {width: width, height: height} = getDimensions()
 
     if activeField == 'elevation'
         DFHMPreview.renderElevation worldState[activeField].data, width, height
@@ -167,6 +183,8 @@ init = ->
     if window.File and window.FileReader
         #Set up the listeners for the different groups
         $('#image-loader').change onFileSelected
+        $('#offset').change onOffsetChange
+        $('#ratio').change onRatioChange
         #canvas = $('#output')[0]
         $('#dropdown-height, #dropdown-width').children('.dropdown-menu').find('a').click onDimensionChange
 

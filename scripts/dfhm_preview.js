@@ -57,7 +57,6 @@
     targetHeight = targetCanvas.height;
     ctx = targetCanvas.getContext('2d');
     ctx.clearRect(0, 0, targetWidth, targetHeight);
-    console.log("" + width + ", " + height + " vs " + targetWidth + ", " + targetHeight);
     if (width !== height) {
       if (width > height) {
         return ctx.drawImage(canvas, 0, 0, width, height, 0, (targetHeight / 2) - (((targetWidth / width) * height) / 2), targetWidth, (targetWidth / width) * height);

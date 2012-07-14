@@ -40,10 +40,7 @@ doRender = (width, height, srcLength, processor) ->
 
     #Work out where to stick the output
     ctx = targetCanvas.getContext '2d'
-
     ctx.clearRect 0, 0, targetWidth, targetHeight
-
-    console.log "#{width}, #{height} vs #{targetWidth}, #{targetHeight}"
 
     if width != height
         if width > height

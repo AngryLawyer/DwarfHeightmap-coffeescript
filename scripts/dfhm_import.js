@@ -8,7 +8,7 @@
 
   window.DFHMImport = {
     toHeightValue: function(image, width, height, type, ratioOverride, offsetOverride) {
-      var canvas, ctx, i, imageData, length, offset, ratio, _i, _results;
+      var canvas, ctx, i, imageData, length, offset, overrideValue, ratio, _i, _results;
       if (ratioOverride == null) {
         ratioOverride = false;
       }
@@ -25,11 +25,17 @@
       length = imageData.data.length;
       ratio = window.ratios[type];
       if (ratioOverride !== false) {
-        ratio += ratioOverride;
+        overrideValue = parseInt(ratioOverride, 10);
+        if (overrideValue !== NaN) {
+          ratio += overrideValue;
+        }
       }
       offset = window.offsets[type];
       if (offsetOverride !== false) {
-        offset += offsetOverride;
+        overrideValue = parseInt(offsetOverride, 10);
+        if (overrideValue !== NaN) {
+          offset += overrideValue;
+        }
       }
       _results = [];
       for (i = _i = 0; _i < length; i = _i += 4) {

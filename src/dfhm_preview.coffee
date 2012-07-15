@@ -19,8 +19,8 @@ processOverlayPixel = (overlay, height) ->
 
 doRender = (width, height, srcLength, processor) ->
     #silly typeerrors from using strings, so make sure they're ints
-    width = parseInt width
-    height = parseInt height
+    width = parseInt(width, 10)
+    height = parseInt(height, 10)
 
     canvas = $('<canvas/>')[0]
     canvas.width = width

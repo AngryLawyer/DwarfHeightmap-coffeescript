@@ -40,8 +40,8 @@
 
   doRender = function(width, height, srcLength, processor) {
     var canvas, ctx, i, imageData, targetCanvas, targetHeight, targetWidth, _i;
-    width = parseInt(width);
-    height = parseInt(height);
+    width = parseInt(width, 10);
+    height = parseInt(height, 10);
     canvas = $('<canvas/>')[0];
     canvas.width = width;
     canvas.height = height;

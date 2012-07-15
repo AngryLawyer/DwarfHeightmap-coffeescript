@@ -19,13 +19,16 @@ window.DFHMImport =
         # Pick out the conversion ratio
         ratio = window.ratios[type]
         if (ratioOverride != false)
-            ratio += ratioOverride
+            overrideValue = parseInt(ratioOverride, 10)
+            if overrideValue != NaN
+                ratio += overrideValue
 
         # Pick out the offset
         offset = window.offsets[type]
-
         if (offsetOverride != false)
-            offset += offsetOverride
+            overrideValue = parseInt(offsetOverride, 10)
+            if overrideValue != NaN
+                offset += overrideValue
 
         for i in [0...length] by 4
             ((pixelToGreyscale imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) * ratio) + offset

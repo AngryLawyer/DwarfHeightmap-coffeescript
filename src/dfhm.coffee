@@ -63,7 +63,7 @@ onExportClick = (event) ->
     
 determineSize = () ->
     {width: width, height: height} = getDimensions()
-    smallest = Math.min parseInt(width), parseInt(height)
+    smallest = Math.min parseInt(width, 10), parseInt(height, 10)
     switch smallest
         when 17 then 'boilerplateTiny'
         when 33 then 'boilerplateSmaller'
@@ -77,7 +77,7 @@ onImageLoaded = (event, stateField) ->
     dummyImage = new Image()
     dummyImage.onload = ->
         worldState[stateField].image = dummyImage
-        worldState[stateField].data = DFHMImport.toHeightValue dummyImage, width, height, stateField
+        worldState[stateField].data = DFHMImport.toHeightValue dummyImage, width, height, stateField, worldState[stateField].ratio, worldState[stateField].offset
         markFieldAsPopulated stateField
         render stateField
 
@@ -106,11 +106,12 @@ getFieldRenderer = (field) ->
         $(this).data('type') == field
     )
 
-# Set the active field
+# Set the active field, as one has been clicked
 setActiveField = (field) ->
     field = $(field)
     field.addClass('active').siblings().removeClass('active')
     {width: width, height:height} = getDimensions()
+    setOverrides worldState[field.data('type')].ratio, worldState[field.data('type')].offset
     render field.data('type')
 
 # Get the currently used type
@@ -134,6 +135,8 @@ clearWorldState = ->
         item.children('a').html(upcase(item.data('type')))
 
     DFHMPreview.clear()
+    $('#output-text').val ''
+    setOverrides false, false
 
 # The user has changed the dimensions of the image, and we're going to need to update things
 onDimensionChange = (event) ->
@@ -145,11 +148,13 @@ onDimensionChange = (event) ->
 
 onRatioChange = (event) ->
     event.preventDefault()
-    worldstate[getActiveField()].ratio = $(event.target).val()
+    worldState[getActiveField()].ratio = $(event.target).val()
+    regenerateAll()
 
 onOffsetChange = (event) ->
     event.preventDefault()
-    worldstate[getActiveField()].offset = $(event.target).val()
+    worldState[getActiveField()].offset = $(event.target).val()
+    regenerateAll()
 
 # Dimensions or similar have changed, so regen all available
 regenerateAll = () ->
@@ -157,7 +162,7 @@ regenerateAll = () ->
 
     for stateField, element of worldState
         if element.image != false
-            element.data = DFHMImport.toHeightValue element.image, width, height, stateField
+            element.data = DFHMImport.toHeightValue element.image, width, height, stateField, element.ratio, element.offset
 
     render getActiveField()
 
@@ -177,6 +182,19 @@ upcase = (string) ->
 # Create an alert box on the page
 alertBox = (type, highlight, text) ->
     $('#alerts').prepend "<div class=\"alert alert-#{type}\"><a class=\"close\" data-dismiss=\"alert\" href=\"#\">x</a><strong>#{highlight}</strong> #{text}</div>"
+
+# Populate the text boxes
+setOverrides = (ratio, offset) ->
+    
+    if offset != false
+        $('#offset').val offset
+    else
+        $('#offset').val ''
+
+    if ratio != false
+        $('#ratio').val ratio
+    else
+        $('#ratio').val ''
 
 # Set up the state of the entire app
 init = ->
@@ -199,7 +217,7 @@ init = ->
 
         alertBox "info", "Hi there!", """To get generating heightmaps, pick a map size, select a field, and import some images! The preview box will update to show you
 what the map will look like - feel free to change some of the advanced variables to get closer to what you want. When you're done, hit Export, and copy the wall of text into data/init/world_gen.txt"""
-        
+        clearWorldState()
     else
         alertBox "error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to somethign more modern and we can get on with it."
 

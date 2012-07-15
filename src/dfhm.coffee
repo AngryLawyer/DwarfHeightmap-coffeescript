@@ -1,9 +1,4 @@
-# TODO: Orthographic precipitation trigger
-# TODO: Offset for each heightmap
-# TODO: 'Step' for each colour level (contrast)?
-
 $ = jQuery
-#canvas = null
 
 window.ratios =
     elevation: 1.56863
@@ -203,7 +198,6 @@ init = ->
         $('#image-loader').change onFileSelected
         $('#offset').change onOffsetChange
         $('#ratio').change onRatioChange
-        #canvas = $('#output')[0]
         $('#dropdown-height, #dropdown-width').children('.dropdown-menu').find('a').click onDimensionChange
 
         $('a', '#heightmaps').click (event) ->

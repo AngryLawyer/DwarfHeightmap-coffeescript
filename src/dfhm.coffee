@@ -54,7 +54,8 @@ onClearClick = (event) ->
 
 onExportClick = (event) ->
     {width: width, height: height} = getDimensions()
-    $('#output-text').text(DFHMExport.export width, height, determineSize(), worldState)
+    exported = DFHMExport.export width, height, determineSize(), worldState
+    $('#output-text').val(exported)
     
 determineSize = () ->
     {width: width, height: height} = getDimensions()
@@ -213,6 +214,6 @@ init = ->
 what the map will look like - feel free to change some of the advanced variables to get closer to what you want. When you're done, hit Export, and copy the wall of text into data/init/world_gen.txt"""
         clearWorldState()
     else
-        alertBox "error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to somethign more modern and we can get on with it."
+        alertBox "error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to something more modern and we can get on with it."
 
 $(document).ready init

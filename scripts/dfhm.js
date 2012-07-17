@@ -67,9 +67,10 @@
   };
 
   onExportClick = function(event) {
-    var height, width, _ref;
+    var exported, height, width, _ref;
     _ref = getDimensions(), width = _ref.width, height = _ref.height;
-    return $('#output-text').text(DFHMExport["export"](width, height, determineSize(), worldState));
+    exported = DFHMExport["export"](width, height, determineSize(), worldState);
+    return $('#output-text').val(exported);
   };
 
   determineSize = function() {
@@ -251,7 +252,7 @@
       alertBox("info", "Hi there!", "To get generating heightmaps, pick a map size, select a field, and import some images! The preview box will update to show you\nwhat the map will look like - feel free to change some of the advanced variables to get closer to what you want. When you're done, hit Export, and copy the wall of text into data/init/world_gen.txt");
       return clearWorldState();
     } else {
-      return alertBox("error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to somethign more modern and we can get on with it.");
+      return alertBox("error", "Uh oh", "- your browser doesn't support features that this app requires! Please switch to something more modern and we can get on with it.");
     }
   };
 
